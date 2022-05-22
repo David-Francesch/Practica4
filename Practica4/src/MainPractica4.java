@@ -9,7 +9,6 @@ public class MainPractica4 {
         ArrayList <Jugador> equipo = new ArrayList<>();
 
         int opcion;
-        int goles;
 
         do {
 
@@ -29,22 +28,8 @@ public class MainPractica4 {
                 break;
                 
                 case 2:
-                    // do{
-                    //     System.out.println("Introduce el num del jugador:");
-                    //     dorsal = sc.nextInt();
-                    //     if (!equipo.contains(dorsal)) {
-                    //         System.out.println("El numero introducido no corresponde a ningun jugador");
-                    //     }else{
-                    //         System.out.println("Introduce cuantos goles a marcado");
-                    //         goles = sc.nextInt();
-                    //         // equipo.set(equipo.indexOf(dorsal), dorsal);
-                    //         // equipo.set();
-                    //         //To-do : hacer que se guarde en el registro adecuado
-                    //         // equipo.get(dorsal);
-                        
-                    //   }
-                    //     break;
-                    // }while(!equipo.contains(dorsal));
+                    ContabilizarGol(equipo);
+                break;
                 case 3:
                     // do{
                     //     System.out.println("Introduce el num del jugador:");
@@ -69,7 +54,7 @@ public class MainPractica4 {
                     break;
                 
                 case 6:
-                    
+                    MostrarJugadores(equipo);
                     break;
                     
                 default:
@@ -102,8 +87,9 @@ public class MainPractica4 {
                         dorsal = sc.nextInt();
                         if (equipo.contains(dorsal)) {
                             System.out.println("Ya has introducido un jugador con este dorsal");
+                        }else{
+                            equipo.add(new JugadorDeCampo(nombre, dorsal, true)); 
                         }
-                        equipo.add(new JugadorDeCampo(nombre, dorsal, true)); 
                     break;
 
                 case 2:                   
@@ -113,8 +99,9 @@ public class MainPractica4 {
                     dorsal = sc.nextInt();
                     if (equipo.contains(dorsal)) {
                         System.out.println("Ya has introducido un jugador con este dorsal");
+                    }else{
+                        equipo.add(new JugadorDeCampo(nombre, dorsal, false));
                     }
-                    equipo.add(new JugadorDeCampo(nombre, dorsal, false));
                     break;
 
                 case 3:  
@@ -123,7 +110,11 @@ public class MainPractica4 {
                     nombre = scs.nextLine();
                     System.out.println("Escribe el num del dorsal:");
                     dorsal = sc.nextInt();
-                    equipo.add(new Portero(nombre, dorsal));
+                    if (equipo.contains(dorsal)) {
+                        System.out.println("Ya has introducido un jugador con este dorsal");
+                    }else{
+                        equipo.add(new Portero(nombre, dorsal));
+                    }
                     break;
 
                 default:
@@ -133,20 +124,36 @@ public class MainPractica4 {
             }
         }
 
-    // public static void MostrarJugadores(ArrayList <Jugador> equipo) {
-    //     Scanner sc= new Scanner(System.in);
-    //     int dorsal;
-    //     System.out.println("Escribe el num del dorsal:");
-    //     dorsal = sc.nextInt();
-    //     for (Jugador jugador : equipo) {
-    //         if (jugador.getDorsal() == dorsal) {
-    //             System.out.println(jugador.toString()+"\nValoración: "+jugador.getValoracion());
-    //         }
-    //     }
-    //     // if (equipo.contains(dorsal)) {
-    //     //     System.out.println();
-    //     // }
-    // }
+        public static void ContabilizarGol(ArrayList <Jugador> equipo) {
+            Scanner sc= new Scanner(System.in);
+            int goles;
+            
+            System.out.println("Introduce el num del jugador:");
+            int dorsal = sc.nextInt();
+            if (!equipo.contains(dorsal)) {
+                System.out.println("El numero introducido no corresponde a ningun jugador");
+            }else{
+                System.out.println("Introduce cuantos goles a marcado");
+                goles = sc.nextInt();
+                for (int i = 0; i < equipo.size(); i++) {
+                    if (equipo.get(i).getDorsal() == dorsal) {
+                        equipo.get(i).setNumGoles(goles);
+                    }
+                }
+            }
+        }
 
+    public static void MostrarJugadores(ArrayList <Jugador> equipo) {
+        Scanner sc= new Scanner(System.in);
+        int dorsal;
+        System.out.println("Escribe el num del dorsal:");
+        dorsal = sc.nextInt();
+        for (int i = 0; i < equipo.size(); i++) {
+            if (jugador.getDorsal() == dorsal) {
+                System.out.println(jugador.toString()+"\nValoración: "+jugador.getValoracion());
+            }  
+        }
     }
+
+}
 

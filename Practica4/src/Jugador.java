@@ -1,7 +1,5 @@
 package Practicas3erTri.Practica4.Practica4.src;
 
-import javax.print.attribute.standard.NumberOfInterveningJobs;
-
 public abstract class Jugador {
     private String nombre;
     private int dorsal;
